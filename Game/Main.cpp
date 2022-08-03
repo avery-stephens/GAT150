@@ -1,11 +1,18 @@
 #include <iostream>
 #include "Engine.h"
-#include <Texture.h>
-
+#include "Renderer/Texture.h"
 
 int main() 
 {
-	std::cout << "Hello World and to your ma" << std::endl;
+	int i = 10;
+	float f = 3.5f;
+	bool b = false;
+
+	const char* s = "jo mama mf";
+
+	//printf("hello foolish fools %d %.2f %s\n",i,f,s);
+
+	std::cout << "Hallo hallo" << std::endl;
 
 	gooblegorb::InitializeMemory();
 	gooblegorb::SetFilePath("../Assets");

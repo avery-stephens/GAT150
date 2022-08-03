@@ -1,4 +1,5 @@
 #include "AudioSystem.h" 
+#include "Core/Logger.h"
 #include <fmod.hpp> 
 
 namespace gooblegorb
@@ -39,6 +40,12 @@ namespace gooblegorb
 		{
 			FMOD::Sound* sound = nullptr;
 			m_fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
+
+			if (sound == nullptr)
+			{
+				LOG("Error Creating sound %s", filename.c_str());
+			}
+
 			m_sounds[name] = sound;
 		}
 	}
@@ -46,6 +53,12 @@ namespace gooblegorb
 	void AudioSystem::PlayAudio(const std::string& name, bool loop)
 	{
 		auto iter = m_sounds.find(name);// !! use find() on m_sounds and return the iterator 
+
+		if (iter == m_sounds.end())
+		{
+			LOG("Error could not find sounds %s", name.c_str());
+		}
+
 		if (iter != m_sounds.end()) // !! if iterator is not m_sounds.end() 
 		{
 			FMOD::Sound* sound = iter->second;

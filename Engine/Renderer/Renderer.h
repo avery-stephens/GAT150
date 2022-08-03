@@ -1,7 +1,7 @@
 #pragma once
 #include "../Math/Vector2.h"
 #include "../Math/Color.h"
-#include "../Texture.h"
+#include "Renderer/Texture.h"
 
 struct SDL_Renderer;
 struct SDL_Window;

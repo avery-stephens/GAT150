@@ -5,16 +5,16 @@
 
 namespace math
 {
-	const float pi = 3.14159265359f; //180
-	const float twoPi = 6.28318530718f; //360
-	const float HalfPi = 1.57079632679f; //90
+	constexpr float pi = 3.14159265359f; //180
+	constexpr float twoPi = 6.28318530718f; //360
+	constexpr float HalfPi = 1.57079632679f; //90
 
-	inline float DegtoRad(float degrees)
+	constexpr inline float DegtoRad(float degrees)
 	{
 		return degrees * (pi / 180);
 	}
 	
-	inline float RadtoDeg(float radians)
+	constexpr inline float RadtoDeg(float radians)
 	{
 		return radians * (180 / pi);
 	}

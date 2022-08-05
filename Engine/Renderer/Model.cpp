@@ -11,7 +11,7 @@ namespace gooblegorb
 		m_radius = CalculateRadius();
 	}
 
-	void gooblegorb::Model::Draw(Renderer& renderer, const Vector2& position, float angle, float scale)
+	void gooblegorb::Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale)
 	{
 		/*neu::Color color;
 		color.r = neu::random(256);
@@ -28,7 +28,7 @@ namespace gooblegorb
 		*/
 
 		//draw model
-		for (int i = 0; i < m_points.size() - 1; i++)
+		for (size_t i = 0; i < m_points.size() - 1; i++)
 		{
 			gooblegorb::Vector2 p1 = Vector2::Rotate((m_points[i] * scale),angle) + position;
 			gooblegorb::Vector2 p2 = Vector2::Rotate((m_points[i + 1] * scale),angle) + position;

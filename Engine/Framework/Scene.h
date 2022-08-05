@@ -15,8 +15,8 @@ namespace gooblegorb
 	{
 	public:
 		Scene() = default;
-		Scene(Game* game) : m_game{ game } {}
 		~Scene() = default;
+		Scene(Game* game) : m_game{ game } {}
 
 		void Update();
 		void Draw(Renderer& renderer);
@@ -29,7 +29,7 @@ namespace gooblegorb
 		Game* GetGame() { return m_game; }
 
 	private:
-		Game* m_game;
+		Game* m_game = nullptr;
 		std::list<std::unique_ptr<Actor>> m_actors;
 		
 	};

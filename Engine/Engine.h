@@ -12,6 +12,9 @@
 #include "Framework/Scene.h"
 #include "Framework/Game.h"
 
+#include "Components/PlayerComponent.h"
+#include "Components/SpriteComponent.h"
+
 #include "Renderer/Text.h"
 #include "Renderer/Font.h"
 

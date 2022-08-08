@@ -35,12 +35,13 @@ int main()
 
 	//create/grab picture
 	std::shared_ptr<gooblegorb::Texture> texture = std::make_shared<gooblegorb::Texture>();
-	texture->Create(gooblegorb::g_renderer, "incrediblysadbeing.png");
+	texture->Create(gooblegorb::g_renderer, "Textures/spaceShips_004.png");
+	gooblegorb::g_audioSystem.AddAudio("laser", "Laser_Shoot33.wav");
 
 	//create actors
 	gooblegorb::Scene scene;
 
-	gooblegorb::Transform transform{ gooblegorb::Vector2{100,100}, 90, {1,1}} ;
+	gooblegorb::Transform transform{ gooblegorb::Vector2{400,300}, 90, {1,1}} ;
 
 	std::unique_ptr<gooblegorb::Actor> actor = std::make_unique <gooblegorb::Actor>(transform);
 	std::unique_ptr<gooblegorb::PlayerComponent> pcomponent = std::make_unique <gooblegorb::PlayerComponent>();
@@ -49,6 +50,13 @@ int main()
 	std::unique_ptr<gooblegorb::SpriteComponent> scomponent = std::make_unique <gooblegorb::SpriteComponent>();
 	scomponent->m_texture = texture;
 	actor->AddComponent(std::move(scomponent));
+
+	std::unique_ptr<gooblegorb::AudioComponent> acomponent = std::make_unique<gooblegorb::AudioComponent>();
+	acomponent->m_soundName = "laser";
+	actor->AddComponent(std::move(acomponent));
+
+	std::unique_ptr<gooblegorb::PhysicsComponent> phcomponent = std::make_unique<gooblegorb::PhysicsComponent>();
+	actor->AddComponent(std::move(phcomponent));
 	scene.Add(std::move(actor));
 
 	float angle = 0;
@@ -73,7 +81,7 @@ int main()
 		//render stuff
 		gooblegorb::g_renderer.BeginFrame();
 
-		gooblegorb::g_renderer.Draw(texture, { 400,300 }, angle, { 0.5f,0.5f }, {0.5, 0.5f});
+		//gooblegorb::g_renderer.Draw(texture, { 400,300 }, angle, { 0.5f,0.5f }, {0.5, 0.5f});
 		scene.Draw(gooblegorb::g_renderer);
 
 		gooblegorb::g_renderer.EndFrame();

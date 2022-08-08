@@ -14,6 +14,8 @@
 
 #include "Components/PlayerComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Components/AudioComponent.h"
+#include "Components/PhysicsComponent.h"
 
 #include "Renderer/Text.h"
 #include "Renderer/Font.h"

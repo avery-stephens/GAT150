@@ -9,5 +9,8 @@ namespace gooblegorb
 		PlayerComponent() = default;
 
 		void Update() override;
+
+	private:
+		float m_speed = 100;
 	};
 }

@@ -156,6 +156,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio\AudioSystem.cpp" />
+    <ClCompile Include="Components\AudioComponent.cpp" />
+    <ClCompile Include="Components\PhysicsComponent.cpp" />
     <ClCompile Include="Components\PlayerComponent.cpp" />
     <ClCompile Include="Components\SpriteComponent.cpp" />
     <ClCompile Include="Core\File.cpp" />
@@ -177,6 +179,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioSystem.h" />
+    <ClInclude Include="Components\AudioComponent.h" />
+    <ClInclude Include="Components\PhysicsComponent.h" />
     <ClInclude Include="Components\PlayerComponent.h" />
     <ClInclude Include="Components\RendererComponent.h" />
     <ClInclude Include="Components\SpriteComponent.h" />
@@ -210,6 +214,10 @@
     <Text Include="..\Build\Assets\Laser.txt" />
     <Text Include="..\Build\Assets\Model.txt" />
     <Text Include="..\Build\Assets\Wanderer.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Build\Assets\Textures\spaceMissiles_001.png" />
+    <Image Include="..\Build\Assets\Textures\spaceShips_004.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

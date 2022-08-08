@@ -6,6 +6,7 @@ namespace gooblegorb
 {
 	void gooblegorb::SpriteComponent::Update()
 	{
+
 	}
 
 	void gooblegorb::SpriteComponent::Draw(Renderer& renderer)

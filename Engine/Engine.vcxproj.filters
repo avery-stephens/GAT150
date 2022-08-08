@@ -93,6 +93,12 @@
     <ClCompile Include="Components\SpriteComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\PhysicsComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AudioComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.h">
@@ -170,6 +176,12 @@
     <ClInclude Include="Components\SpriteComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Components\AudioComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PhysicsComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Assets\Bullet.txt">
@@ -193,5 +205,13 @@
     <Text Include="..\Build\Assets\Laser.txt">
       <Filter>Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Build\Assets\Textures\spaceMissiles_001.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Textures\spaceShips_004.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

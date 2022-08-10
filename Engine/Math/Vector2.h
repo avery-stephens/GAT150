@@ -19,6 +19,8 @@ namespace gooblegorb
 		Vector2(int x, int y) : x{ (float)x }, y{ (float)y } {}
 
 		void Set(float x, float y) { this->x = x; this->y = y; }
+		float operator [] (size_t index) const { return (&x)[index]; }
+		float& operator [] (size_t index) { return (&x)[index]; }
 
 		//arithmetic operators
 		//Vector2 = Vector2 + Vector2

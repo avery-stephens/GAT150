@@ -57,6 +57,7 @@ int main()
 
 	std::unique_ptr<gooblegorb::PhysicsComponent> phcomponent = std::make_unique<gooblegorb::PhysicsComponent>();
 	actor->AddComponent(std::move(phcomponent));
+
 	scene.Add(std::move(actor));
 
 	float angle = 0;

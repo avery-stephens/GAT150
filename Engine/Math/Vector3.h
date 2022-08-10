@@ -46,7 +46,7 @@ namespace gooblegorb
 		//comparison
 		//Vector3 == Vector3
 		bool operator == (const Vector3& v) { return (this->x == v.x && this->y == v.y && this->z == v.z); }
-		bool operator != (const Vector3& v) { return (this->x != v.x || this->y != v.y || this->z != v.z); }
+		bool operator != (const Vector3& v) { return !(*this == v); }
 
 		//functions
 		float LengthSqr();

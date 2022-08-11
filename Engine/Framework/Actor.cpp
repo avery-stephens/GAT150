@@ -9,6 +9,13 @@ namespace gooblegorb
 		{
 			component->Update();
 		}
+		for (auto& child : m_children) 
+		{
+			child->Update();
+		}
+
+		if (m_parent) m_transform.Update(m_parent->m_transform.matrix);
+		else m_transform.Update();
 	}
 	void gooblegorb::Actor::Draw(Renderer& renderer)
 	{
@@ -22,8 +29,18 @@ namespace gooblegorb
 			//component->Update();
 		}
 
+		for (auto& child : m_children)
+		{
+			child->Draw(renderer);
+		}
 
 		//m_model.Draw(renderer, m_transform.position, m_transform.rotation, m_transform.scale);
+	}
+	void Actor::AddChild(std::unique_ptr<Actor> child)
+	{
+		child->m_parent = this;
+		child->m_scene = m_scene;
+		m_children.push_back(std::move(child));
 	}
 	void Actor::AddComponent(std::unique_ptr<Component> component)
 	{

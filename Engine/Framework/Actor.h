@@ -17,6 +17,8 @@ namespace gooblegorb
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
+		void AddChild(std::unique_ptr<Actor> child);
+
 		void AddComponent(std::unique_ptr<Component> component);
 		template<typename T>
 		T* GetComponent();
@@ -39,7 +41,9 @@ namespace gooblegorb
 		Vector2 m_velocity;
 
 		Scene* m_scene = nullptr;
+		Actor* m_parent = nullptr;
 		std::vector<std::unique_ptr<Component>> m_components;
+		std::vector<std::unique_ptr<Actor>> m_children;
 	};
 
 	template<typename T>

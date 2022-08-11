@@ -64,13 +64,6 @@ namespace gooblegorb
 		return x * x + y * y + z * z;
 	}
 
-	inline Vector3 Vector3::Normalized()
-	{
-		float length = Length();
-
-		return (length == 0) ? Vector3{ 0,0,0 } : Vector3{ x / length, y / length, z/length };
-	}
-
 	inline float Vector3::DistanceSqr(const Vector3& v)
 	{
 		//??

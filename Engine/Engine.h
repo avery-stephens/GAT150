@@ -16,9 +16,13 @@
 #include "Components/SpriteComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/PhysicsComponent.h"
+#include "Components/ModelComponent.h"
 
 #include "Renderer/Text.h"
 #include "Renderer/Font.h"
+#include "Renderer/Renderer.h"
+#include "Renderer/Model.h"
+#include "Renderer/Texture.h"
 
 #include "Audio/AudioSystem.h"
 

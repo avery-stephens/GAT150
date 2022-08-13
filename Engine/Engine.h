@@ -5,7 +5,6 @@
 #include "Math/MathUtils.h"
 #include "Math/Random.h"
 
-#include "Input/InputSystem.h"
 #include "Renderer/Renderer.h"
 #include "Core/Time.h"
 
@@ -25,6 +24,8 @@
 #include "Renderer/Texture.h"
 
 #include "Audio/AudioSystem.h"
+#include "Input/InputSystem.h"
+#include "Resource/ResourceManager.h"
 
 #include <memory>
 #include <vector>
@@ -39,4 +40,6 @@ namespace gooblegorb
 	extern Time g_time;
 
 	extern AudioSystem g_audioSystem;
+
+	extern ResourceManager g_resources;
 }

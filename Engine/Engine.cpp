@@ -9,4 +9,6 @@ namespace gooblegorb
 	Time g_time;
 
 	AudioSystem g_audioSystem;
+
+	ResourceManager g_resources;
 }

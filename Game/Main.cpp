@@ -28,17 +28,22 @@ int main()
 	gooblegorb::g_renderer.Initialize();
 	gooblegorb::g_inputSystem.Initialize();
 	gooblegorb::g_audioSystem.Initialize();
+	gooblegorb::g_resources.Initialize();
 
 	//create window
 	gooblegorb::g_renderer.CreateWindow("bullhonky. thats what this is", 800, 600);
 	gooblegorb::g_renderer.SetClearColor(gooblegorb::Color{ 0,0,0,255 });
 
 	//load assets
-	std::shared_ptr<gooblegorb::Texture> texture = std::make_shared<gooblegorb::Texture>();
-	texture->Create(gooblegorb::g_renderer, "Model.txt");
+	//std::shared_ptr<gooblegorb::Texture> texture = std::make_shared<gooblegorb::Texture>();
+	//texture->Create(gooblegorb::g_renderer, "Textures/spaceShips_004.png");
+	std::shared_ptr<gooblegorb::Texture> texture = gooblegorb::g_resources.Get<gooblegorb::Texture>("Textures/spaceShips_004.png",&gooblegorb::g_renderer);
 
-	std::shared_ptr<gooblegorb::Model> model = std::make_shared<gooblegorb::Model>();
-	model->Create("Model.txt");
+	//std::shared_ptr<gooblegorb::Model> model = std::make_shared<gooblegorb::Model>();
+	//model->Create("Model.txt");
+
+	//std::shared_ptr<gooblegorb::Model> model = gooblegorb::g_resources.Get<gooblegorb::Model>("Model.txt");
+	//std::shared_ptr<gooblegorb::Model> model2 = gooblegorb::g_resources.Get<gooblegorb::Model>("Model.txt");
 
 	gooblegorb::g_audioSystem.AddAudio("laser", "Laser_Shoot33.wav");
 
@@ -52,7 +57,7 @@ int main()
 	actor->AddComponent(std::move(pcomponent));
 	
 	std::unique_ptr<gooblegorb::ModelComponent> mcomponent = std::make_unique <gooblegorb::ModelComponent>();
-	mcomponent->m_model = model;
+	mcomponent->m_model = gooblegorb::g_resources.Get<gooblegorb::Model>("Model.txt");
 	actor->AddComponent(std::move(mcomponent));
 
 	//std::unique_ptr<gooblegorb::SpriteComponent> scomponent = std::make_unique <gooblegorb::SpriteComponent>();
@@ -71,7 +76,7 @@ int main()
 	std::unique_ptr<gooblegorb::Actor> child = std::make_unique <gooblegorb::Actor>(transformC);
 
 	std::unique_ptr<gooblegorb::ModelComponent> mcomponentC = std::make_unique <gooblegorb::ModelComponent>();
-	mcomponentC->m_model = model;
+	mcomponentC->m_model = gooblegorb::g_resources.Get<gooblegorb::Model>("Model.txt");
 	child->AddComponent(std::move(mcomponentC));
 
 	actor->AddChild(std::move(child));

@@ -9,7 +9,7 @@ namespace gooblegorb
 
 	void ResourceManager::Shutdown()
 	{
-
+		m_resources.clear();
 	}
 
 }

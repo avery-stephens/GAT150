@@ -20,7 +20,14 @@ namespace gooblegorb
 		}
 	}
 
+	/*
 	bool Font::Create(const std::string& filename, void* data)
+	{
+		return false;
+	}
+	*/
+
+	bool Font::Create(std::string filename, ...)
 	{
 		return false;
 	}

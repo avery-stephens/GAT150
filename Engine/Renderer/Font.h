@@ -14,7 +14,10 @@ namespace gooblegorb
 		Font(const std::string& filename, int fontSize);
 		~Font();
 
-		bool Create(const std::string& filename, void* data = nullptr) override;
+		//bool Create(const std::string& filename, void* data = nullptr) override;
+
+		bool Create(std::string filename, ...) override;
+
 		void Load(const std::string& filename, int fontSize);
 
 		friend class Text;

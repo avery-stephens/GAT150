@@ -2,8 +2,58 @@
 #include "Engine.h"
 //#include "Renderer/Texture.h"
 
+class Singleton
+{
+public:
+	//dtor
+	~Singleton() { std::cout << "dtor\n"; }
+	//copy ctor
+	Singleton(const Singleton& other) = delete;
+	//assignment operator
+	Singleton& operator = (const Singleton& other) = delete;
+	//assignment ctor
+
+	void Say() { std::cout << "sup nerd\n"; }
+
+	static Singleton& Instance()
+	{
+		static Singleton instance;
+		return instance;
+	}
+private:
+	//ctor
+	Singleton() { std::cout << "ctor\n"; }
+};
+
+void f()
+{
+	static int c = 0;
+	c++;
+	std::cout << c << std::endl;
+}
+
+class A {};
+class B : public A {};
+class C : public A {};
+
+A* Create(const std::string& id)
+{
+	if (id == "B") return new B();
+	if (id == "C") return new C();
+
+	return nullptr;
+
+}
 int main() 
 {
+	f();
+	f();
+	f();
+	f();
+	f();
+
+	Singleton::Instance().Say();
+
 	//constexpr int i = 5;
 
 	int i = 10;
@@ -30,14 +80,24 @@ int main()
 	gooblegorb::g_audioSystem.Initialize();
 	gooblegorb::g_resources.Initialize();
 
+	gooblegorb::Engine::Instance().Register();
+
 	//create window
 	gooblegorb::g_renderer.CreateWindow("bullhonky. thats what this is", 800, 600);
 	gooblegorb::g_renderer.SetClearColor(gooblegorb::Color{ 0,0,0,255 });
 
 	//load assets
+	
 	//std::shared_ptr<gooblegorb::Texture> texture = std::make_shared<gooblegorb::Texture>();
 	//texture->Create(gooblegorb::g_renderer, "Textures/spaceShips_004.png");
-	std::shared_ptr<gooblegorb::Texture> texture = gooblegorb::g_resources.Get<gooblegorb::Texture>("Textures/spaceShips_004.png",&gooblegorb::g_renderer);
+	
+	//std::shared_ptr<gooblegorb::Texture> texture = gooblegorb::g_resources.Get<gooblegorb::Texture>("Textures/spaceShips_004.png",&gooblegorb::g_renderer);
+
+	auto texture = gooblegorb::g_resources.Get<gooblegorb::Texture>("Textures/spaceShips_004.png", gooblegorb::g_renderer);
+
+	auto font = gooblegorb::g_resources.Get<gooblegorb::Font>("font/dogica.ttf", 10);
+
+	
 
 	//std::shared_ptr<gooblegorb::Model> model = std::make_shared<gooblegorb::Model>();
 	//model->Create("Model.txt");
@@ -52,8 +112,10 @@ int main()
 
 	gooblegorb::Transform transform{ gooblegorb::Vector2{400,300}, 90, {3,3}} ;
 
-	std::unique_ptr<gooblegorb::Actor> actor = std::make_unique <gooblegorb::Actor>(transform);
-	std::unique_ptr<gooblegorb::PlayerComponent> pcomponent = std::make_unique <gooblegorb::PlayerComponent>();
+	//std::unique_ptr<gooblegorb::Actor> actor = std::make_unique <gooblegorb::Actor>(transform);
+	std::unique_ptr<gooblegorb::Actor> actor = gooblegorb::Factory::Instance().Create<gooblegorb::Actor>("Actor");
+	actor->m_transform = transform;
+	std::unique_ptr<gooblegorb::Component> pcomponent = gooblegorb::Factory::Instance().Create<gooblegorb::Component>("PlayerComponent");
 	actor->AddComponent(std::move(pcomponent));
 	
 	std::unique_ptr<gooblegorb::ModelComponent> mcomponent = std::make_unique <gooblegorb::ModelComponent>();
@@ -68,7 +130,7 @@ int main()
 	acomponent->m_soundName = "laser";
 	actor->AddComponent(std::move(acomponent));
 
-	std::unique_ptr<gooblegorb::PhysicsComponent> phcomponent = std::make_unique<gooblegorb::PhysicsComponent>();
+	std::unique_ptr<gooblegorb::Component> phcomponent = gooblegorb::Factory::Instance().Create<gooblegorb::Component>("PhysicsComponent");
 	actor->AddComponent(std::move(phcomponent));
 
 	//childrens

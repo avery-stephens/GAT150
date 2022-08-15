@@ -15,7 +15,17 @@ namespace gooblegorb
 		m_radius = CalculateRadius();
 	}
 
-	bool Model::Create(const std::string& filename, void* data)
+	//bool Model::Create(const std::string& filename, void* data)
+	//{
+	//	if (!Load(filename))
+	//	{
+	//		LOG("!! ERROR !! could not create model%s", filename.c_str());
+	//		return false;
+	//	}
+	//	return true;
+	//}
+
+	bool Model::Create(std::string filename, ...)
 	{
 		if (!Load(filename))
 		{

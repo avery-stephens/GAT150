@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Resource">
       <UniqueIdentifier>{4168fb07-c0d6-449a-9930-8951d6fd36c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Serialization">
+      <UniqueIdentifier>{8a4800e3-4a88-490c-a1b7-58c74ca0ce62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -221,6 +224,9 @@
     <ClInclude Include="Framework\Factory.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\json.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Assets\Bullet.txt">
@@ -242,6 +248,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="..\Build\Assets\Laser.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\..\..\..\..\..\..\Downloads\level.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -199,6 +199,7 @@
     <ClInclude Include="Framework\Factory.h" />
     <ClInclude Include="Framework\Game.h" />
     <ClInclude Include="Framework\GameObject.h" />
+    <ClInclude Include="Framework\json.h" />
     <ClInclude Include="Framework\Scene.h" />
     <ClInclude Include="Framework\Singleton.h" />
     <ClInclude Include="Input\InputSystem.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Resource\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\..\..\..\..\Downloads\level.txt" />
     <Text Include="..\Build\Assets\Asteroid.txt" />
     <Text Include="..\Build\Assets\Bullet.txt" />
     <Text Include="..\Build\Assets\Enemy.txt" />

@@ -1,6 +1,9 @@
 #pragma once
+#include "Framework/json.h"
+
 #include "Core/Memory.h"
 #include "Core/File.h"
+#include "Core/Time.h"
 
 #include "Math/MathUtils.h"
 #include "Math/Random.h"

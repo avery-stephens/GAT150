@@ -1,4 +1,6 @@
 #include "Color.h"
+
+
 namespace gooblegorb
 {
 	std::istream& operator >> (std::istream& stream, Color& color)
@@ -36,5 +38,12 @@ namespace gooblegorb
 
 		return stream;
 		*/
+	}
+
+	std::ostream& operator<<(std::ostream& stream, const Color& color)
+	{
+		stream << (int)color.r << " " << (int)color.g << " " << (int)color.b << " " << (int)color.a;
+
+		return stream;
 	}
 }

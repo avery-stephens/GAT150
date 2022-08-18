@@ -1,16 +1,21 @@
 #pragma once
 #include "Vector2.h"
 #include "Matrix3x3.h"
+#include "MathUtils.h"
+#include "Serialization/Serializable.h"
 
 namespace gooblegorb
 {
-	struct Transform 
+	struct Transform : public ISerializable
 	{
 		Vector2 position;
 		float rotation{ 0 };
 		Vector2 scale{ 1,1 };
 
 		Matrix3x3 matrix;
+
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 		void Update()
 		{
@@ -39,5 +44,7 @@ namespace gooblegorb
 
 			return { mxTranslation * mxRotation * mxScale };
 		}
+
+		// Inherited via ISerializable
 	};
 }

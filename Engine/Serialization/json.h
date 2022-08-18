@@ -2,6 +2,8 @@
 #include "rapidjson/document.h" 
 #include <string> 
 
+#define READ_DATA(value, data) gooblegorb::json::Get(value, #data, data)
+
 namespace gooblegorb
 {
 	struct Vector2;

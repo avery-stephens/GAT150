@@ -19,12 +19,12 @@ void gooblegorb::PlayerComponent::Update()
 		m_owner->m_transform.rotation += 180 * g_time.deltaTime;
 		//direction = Vector2::right;
 	}
-	
+
 	float thrust = 0;
 
 	if (g_inputSystem.GetKeyState(key_up) == InputSystem::KeyState::Held)
 	{
-		thrust = 250;
+		thrust = speed;
 		//direction = Vector2::up;
 	}
 
@@ -33,7 +33,7 @@ void gooblegorb::PlayerComponent::Update()
 	if (component)
 	{
 		//thrust
-		Vector2 force = Vector2::Rotate({ 1, 0 },(math::DegtoRad(m_owner->m_transform.rotation))) * thrust;
+		Vector2 force = Vector2::Rotate({ 1, 0 }, (math::DegtoRad(m_owner->m_transform.rotation))) * thrust;
 		component->ApplyForce(force);
 
 		//gravity
@@ -51,6 +51,20 @@ void gooblegorb::PlayerComponent::Update()
 			component->Play();
 		}
 	}
+}
+
+bool gooblegorb::PlayerComponent::Write(const rapidjson::Value& value) const
+{
+	return true;
+}
+
+bool gooblegorb::PlayerComponent::Read(const rapidjson::Value& value)
+{
+	READ_DATA(value, speed);
+
+	return true;
+}
+
 	//if (g_inputSystem.GetKeyState(key_down) == InputSystem::KeyState::Held)
 	//{
 	//	direction = Vector2::down;
@@ -89,4 +103,4 @@ void gooblegorb::PlayerComponent::Update()
 	*/
 
 	
-}
+

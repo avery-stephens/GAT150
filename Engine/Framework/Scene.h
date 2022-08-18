@@ -11,7 +11,7 @@ namespace gooblegorb
 	class Renderer;
 	class Game;
 
-	class Scene
+	class Scene : public ISerializable
 	{
 	public:
 		Scene() = default;
@@ -21,7 +21,11 @@ namespace gooblegorb
 		void Update();
 		void Draw(Renderer& renderer);
 
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
+
 		void Add(std::unique_ptr<Actor> actor);
+		void RemoveAll();
 
 		template<typename T>
 		T* GetActor();
@@ -32,6 +36,8 @@ namespace gooblegorb
 		Game* m_game = nullptr;
 		std::list<std::unique_ptr<Actor>> m_actors;
 		
+		// Inherited via ISerializable
+
 	};
 
 	template<typename T>

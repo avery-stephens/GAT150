@@ -8,38 +8,6 @@ int main()
 	gooblegorb::InitializeMemory();
 	gooblegorb::SetFilePath("../Assets");
 
-	rapidjson::Document document;
-	bool success = gooblegorb::json::Load("json.txt", document);
-	assert(success);
-
-	std::string str;
-	gooblegorb::json::Get(document, "string", str);
-	std::cout << str << std::endl;
-
-	bool b;
-	gooblegorb::json::Get(document, "boolean", b);
-	std::cout << b << std::endl;
-
-	int i1;
-	gooblegorb::json::Get(document, "integer1", i1);
-	std::cout << i1 << std::endl;
-
-	int i2;
-	gooblegorb::json::Get(document, "integer2", i2);
-	std::cout << i2 << std::endl;
-
-	float f;
-	gooblegorb::json::Get(document, "float", f);
-	std::cout << f << std::endl;
-
-	gooblegorb::Vector2 v2;
-	gooblegorb::json::Get(document, "vector2", v2);
-	std::cout << v2 << std::endl;
-
-	gooblegorb::Color color;
-	gooblegorb::json::Get(document, "color", color);
-	std::cout << color << std::endl;
-
 	//initialization
 	gooblegorb::g_renderer.Initialize();
 	gooblegorb::g_inputSystem.Initialize();
@@ -51,8 +19,14 @@ int main()
 	//create window
 	gooblegorb::g_renderer.CreateWindow("Gooblegorber", 800, 600);
 	gooblegorb::g_renderer.SetClearColor(gooblegorb::Color{ 0,0,0,255 });
-
+	
+	//create scene
 	gooblegorb::Scene scene;
+
+	rapidjson::Document document;
+	bool success = gooblegorb::json::Load("level.txt", document);
+
+	scene.Read(document);
 
 	bool quit = false;
 	while (!quit)

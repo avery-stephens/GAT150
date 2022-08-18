@@ -15,3 +15,13 @@ void gooblegorb::AudioComponent::Stop()
 {
 
 }
+
+bool gooblegorb::AudioComponent::Write(const rapidjson::Value& value) const
+{
+	return false;
+}
+
+bool gooblegorb::AudioComponent::Read(const rapidjson::Value& value)
+{
+	return false;
+}

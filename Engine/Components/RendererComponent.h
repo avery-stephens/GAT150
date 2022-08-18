@@ -8,5 +8,7 @@ namespace gooblegorb
 	{
 	public:
 		virtual void Draw(Renderer& renderer) = 0;
+
+		virtual void Update() override;
 	};
 }

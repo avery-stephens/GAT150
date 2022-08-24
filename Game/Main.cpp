@@ -56,9 +56,9 @@ int main()
 	}
 	scene.RemoveAll();
 
-	gooblegorb::g_renderer.Shutdown();
+	gooblegorb::g_resources.Shutdown();
 	gooblegorb::g_audioSystem.Shutdown();
 	gooblegorb::g_inputSystem.Shutdown();
-	gooblegorb::g_resources.Shutdown();
 	gooblegorb::g_physicsSystem.Shutdown();
+	gooblegorb::g_renderer.Shutdown();
 }

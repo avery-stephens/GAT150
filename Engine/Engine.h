@@ -19,8 +19,12 @@
 #include "Components/PlayerComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Components/AudioComponent.h"
+#include "Components/CollisionComponent.h"
 #include "Components/PhysicsComponent.h"
 #include "Components/ModelComponent.h"
+#include "Components/SpriteAnimComponent.h"
+#include "Components/RBPhysicsComponent.h"
+#include "Components/TextComponent.h"
 
 #include "Renderer/Text.h"
 #include "Renderer/Font.h"
@@ -31,6 +35,8 @@
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
 #include "Resource/ResourceManager.h"
+
+#include "Physics/PhysicsSystem.h"
 
 #include <memory>
 #include <vector>
@@ -47,6 +53,8 @@ namespace gooblegorb
 	extern AudioSystem g_audioSystem;
 
 	extern ResourceManager g_resources;
+
+	extern PhysicsSystem g_physicsSystem;
 
 	class Engine : public Singleton<Engine>
 	{

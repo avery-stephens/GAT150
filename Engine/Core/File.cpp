@@ -24,7 +24,7 @@ namespace gooblegorb
 	{
 		if (!FileExists(pathname)) return false;
 
-		size = std::filesystem::file_size(pathname);
+		size = (size_t)std::filesystem::file_size(pathname);
 
 		return true;
 	}
@@ -33,7 +33,7 @@ namespace gooblegorb
 	{
 		if (!FileExists(pathname))
 		{
-			LOG("!! ERROR !! Could not read file %s", pathname.c_str());
+			LOG("!! !! ERROR !! !! Could not read file %s", pathname.c_str());
 			return false;
 		}
 

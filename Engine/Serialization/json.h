@@ -4,14 +4,12 @@
 
 #define READ_DATA(value, data) gooblegorb::json::Get(value, #data, data)
 
-namespace gooblegorb
+namespace gooblegorb 
 {
 	struct Vector2;
 	struct Color;
-}
+	struct Rect;
 
-namespace gooblegorb 
-{
 	namespace json 
 	{
 		bool Load(const std::string& filename, rapidjson::Document& document);
@@ -22,5 +20,6 @@ namespace gooblegorb
 		bool Get(const rapidjson::Value& value, const std::string& name, std::string& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, Color& data);
+		bool Get(const rapidjson::Value& value, const std::string& name, Rect& data);
 	}
 }

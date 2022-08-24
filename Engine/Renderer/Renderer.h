@@ -10,6 +10,7 @@ namespace gooblegorb
 {
 	struct Transform;
 	class Texture;
+	struct Rect;
 
 	class Renderer
 	{
@@ -35,6 +36,7 @@ namespace gooblegorb
 
 		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle = 0, const Vector2& scale = Vector2{ 1,1 }, const Vector2& registration = Vector2{});
 		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{0.5f,0.5f});
+		void Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration = Vector2{0.5f,0.5f});
 
 		friend class Text;
 		friend class Texture;
@@ -42,6 +44,7 @@ namespace gooblegorb
 	private:
 		int m_width = 0;
 		int m_height = 0;
+
 		Color m_clearColor{ 0,0,0,255 };
 
 		SDL_Renderer* m_renderer{ nullptr };

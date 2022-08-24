@@ -3,6 +3,7 @@
 #include "Core/Logger.h"
 #include "Math/Vector2.h"
 #include "Math/Color.h"
+#include "Math/Rect.h"
 #include <fstream>
 
 namespace gooblegorb::json
@@ -10,13 +11,13 @@ namespace gooblegorb::json
     bool gooblegorb::json::Load(const std::string& filename, rapidjson::Document& document)
     {
         // !! create a std::ifstream object called stream 
-        // !! check if it is open, if not use LOG to print error and return false 
+        // !! check if it is open, if not use LOG to print !! ERROR !! and return false 
         // !! https://riptutorial.com/cplusplus/example/1625/opening-a-file 
 
         std::ifstream stream(filename);
         if (stream.is_open() == false) 
         {
-            LOG("error opening file %s", filename.c_str());
+            LOG("!! ERROR !! opening file %s", filename.c_str());
             return false;
         }
 
@@ -37,7 +38,7 @@ namespace gooblegorb::json
 
         if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsInt() == false)
         {
-            LOG("error reading json data %s", name.c_str());
+            LOG("!! ERROR !! reading json data %s", name.c_str());
             return false;
         }
 
@@ -51,7 +52,7 @@ namespace gooblegorb::json
     {
         if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false)
         {
-            LOG("error reading json data %s", name.c_str());
+            LOG("!! ERROR !! reading json data %s", name.c_str());
             return false;
         }
 
@@ -65,7 +66,7 @@ namespace gooblegorb::json
     {
         if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsBool() == false)
         {
-            LOG("error reading json data %s", name.c_str());
+            LOG("!! ERROR !! reading json data %s", name.c_str());
             return false;
         }
 
@@ -79,7 +80,7 @@ namespace gooblegorb::json
     {
         if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsString() == false)
         {
-            LOG("error reading json data %s", name.c_str());
+            LOG("!! ERROR !! reading json data %s", name.c_str());
             return false;
         }
 
@@ -94,7 +95,7 @@ namespace gooblegorb::json
         // check if 'name' member exists and is an array with 2 elements 
         if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 2)
         {
-            LOG("error reading json data %s", name.c_str());
+            LOG("!! ERROR !! reading json data %s", name.c_str());
             return false;
 
         }
@@ -107,7 +108,7 @@ namespace gooblegorb::json
             if (!array[i].IsNumber())
             {
 
-                LOG("error reading json data (not a float) %s", name.c_str());
+                LOG("!! ERROR !! reading json data (not a float) %s", name.c_str());
                 return false;
             }
 
@@ -122,7 +123,7 @@ namespace gooblegorb::json
         // check if 'name' member exists and is an array with 2 elements 
         if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4)
         {
-            LOG("error reading json data %s", name.c_str());
+            LOG("!! ERROR !! reading json data %s", name.c_str());
             return false;
 
         }
@@ -135,12 +136,35 @@ namespace gooblegorb::json
             if (!array[i].IsInt())
             {
 
-                LOG("error reading json data (not a float) %s", name.c_str());
+                LOG("!! ERROR !! reading json data (not a float) %s", name.c_str());
                 return false;
             }
 
             data[i] = array[i].GetInt();
         }
+
+        return true;
+    }
+
+    //[0,0,32,32]
+
+    bool Get(const rapidjson::Value& value, const std::string& name, Rect& data)
+    {
+        // check if 'name' member exists and is an array with 2 elements 
+        if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4)
+        {
+            LOG("!! ERROR !! reading json data %s", name.c_str());
+            return false;
+
+        }
+        // create json array object 
+        auto& array = value[name.c_str()];
+
+        //array values?
+        data.x = array[0].GetInt();
+        data.y = array[0].GetInt();
+        data.w = array[0].GetInt();
+        data.h = array[0].GetInt();
 
         return true;
     }

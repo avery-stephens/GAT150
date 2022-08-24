@@ -15,6 +15,7 @@ namespace gooblegorb
 		Actor(const Transform& transform) : m_transform{ transform } {}
 
 		virtual void Update() override;
+		virtual void Initialize() override;
 		virtual void Draw(Renderer& renderer);
 
 		virtual bool Write(const rapidjson::Value& value) const override;
@@ -54,8 +55,6 @@ namespace gooblegorb
 		Actor* m_parent = nullptr;
 		std::vector<std::unique_ptr<Component>> m_components;
 		std::vector<std::unique_ptr<Actor>> m_children;
-
-		// Inherited via ISerializable
 	};
 
 	template<typename T>

@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Audio/AudioChannel.h"
 
 namespace gooblegorb 
 {
@@ -7,7 +8,9 @@ namespace gooblegorb
 	{
 	public:
 		AudioComponent() = default;
+		~AudioComponent();
 
+		void Initialize();
 		void Update();
 
 		virtual bool Write(const rapidjson::Value& value) const override;
@@ -16,12 +19,13 @@ namespace gooblegorb
 		void Play();
 		void Stop();
 
-	public:
-		std::string m_soundName;
-		bool playOnAwake = false;
-		float m_pitch = 1;
-		bool loop = false;
+	private:
+		AudioChannel m_channel;
 
-		// Inherited via Component
+		std::string sound_name;
+		bool playOnAwake = false;
+		float pitch = 1;
+		float volume = 1;
+		bool loop = false;
 	};
 }

@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Math/MathUtils.h"
 #include "Math/Transform.h"
+#include "Math/Rect.h"
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -65,7 +66,7 @@ namespace gooblegorb
 		Vector2 origin = size * registration;
 		Vector2 Tposition = transform.position - origin;
 
-		SDL_Rect dest{};
+		SDL_Rect dest;
 		// !! make sure to cast to int to prevent compiler warnings 
 		dest.x = ((int)Tposition.x);// !! set to position x 
 		dest.y = ((int)Tposition.y);// !! set to position y 
@@ -75,6 +76,32 @@ namespace gooblegorb
 		SDL_Point center{ (int)origin.x,(int)origin.y };
 
 		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
+	}
+
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration)
+	{
+		Vector2 size = Vector2{source.w, source.h};
+		size = size * transform.scale;
+
+		Vector2 origin = size * registration;
+		Vector2 Tposition = transform.position - origin;
+
+		SDL_Rect dest;
+		// !! make sure to cast to int to prevent compiler warnings 
+		dest.x = ((int)Tposition.x);// !! set to position x 
+		dest.y = ((int)Tposition.y);// !! set to position y 
+		dest.w = ((int)size.x);// !! set to size x 
+		dest.h = ((int)size.y);// !! set to size y
+
+		SDL_Rect src;
+		src.x = source.x;
+		src.y = source.y;
+		src.w = source.w;
+		src.h = source.h;
+
+		SDL_Point center{ (int)origin.x,(int)origin.y };
+
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, transform.rotation, &center, SDL_FLIP_NONE);
 	}
 
 	void Renderer::BeginFrame()

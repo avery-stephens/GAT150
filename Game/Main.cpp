@@ -13,6 +13,7 @@ int main()
 	gooblegorb::g_inputSystem.Initialize();
 	gooblegorb::g_audioSystem.Initialize();
 	gooblegorb::g_resources.Initialize();
+	gooblegorb::g_physicsSystem.Initialize();
 
 	gooblegorb::Engine::Instance().Register();
 
@@ -27,6 +28,7 @@ int main()
 	bool success = gooblegorb::json::Load("level.txt", document);
 
 	scene.Read(document);
+	scene.Initialize();
 
 	bool quit = false;
 	while (!quit)
@@ -34,6 +36,7 @@ int main()
 		gooblegorb::g_time.tick();
 		gooblegorb::g_inputSystem.Update();
 		gooblegorb::g_audioSystem.Update();
+		gooblegorb::g_physicsSystem.Update();
 
 		if (gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_escape) == gooblegorb::InputSystem::KeyState::Pressed) quit = true;
 		
@@ -51,7 +54,11 @@ int main()
 
 		gooblegorb::g_renderer.EndFrame();
 	}
+	scene.RemoveAll();
 
 	gooblegorb::g_renderer.Shutdown();
 	gooblegorb::g_audioSystem.Shutdown();
+	gooblegorb::g_inputSystem.Shutdown();
+	gooblegorb::g_resources.Shutdown();
+	gooblegorb::g_physicsSystem.Shutdown();
 }

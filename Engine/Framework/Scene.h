@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Actor.h"
 #include <list>
 #include <memory>
@@ -11,14 +10,15 @@ namespace gooblegorb
 	class Renderer;
 	class Game;
 
-	class Scene : public ISerializable
+	class Scene : public GameObject, public ISerializable
 	{
 	public:
 		Scene() = default;
 		~Scene() = default;
 		Scene(Game* game) : m_game{ game } {}
 
-		void Update();
+		void Update() override;
+		void Initialize() override;
 		void Draw(Renderer& renderer);
 
 		virtual bool Write(const rapidjson::Value& value) const override;

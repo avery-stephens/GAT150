@@ -19,7 +19,7 @@ namespace gooblegorb
 	//{
 	//	if (!Load(filename))
 	//	{
-	//		LOG("!! ERROR !! could not create model%s", filename.c_str());
+	//		LOG("!! !! ERROR !! !! could not create model%s", filename.c_str());
 	//		return false;
 	//	}
 	//	return true;
@@ -29,7 +29,7 @@ namespace gooblegorb
 	{
 		if (!Load(filename))
 		{
-			LOG("!! ERROR !! could not create model%s", filename.c_str());
+			LOG("!! !! ERROR !! !! could not create model%s", filename.c_str());
 			return false;
 		}
 		return true;
@@ -37,10 +37,10 @@ namespace gooblegorb
 
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale)
 	{
-		/*neu::Color color;
-		color.r = neu::random(256);
-		color.g = neu::random(256);
-		color.b = neu::random(256);
+		/*gooblegorb::Color color;
+		color.r = gooblegorb::random(256);
+		color.g = gooblegorb::random(256);
+		color.b = gooblegorb::random(256);
 		color.a = 255;
 		//renderer.SetClearColor(color);
 
@@ -80,7 +80,7 @@ namespace gooblegorb
 		std::string buffer;
 		if (!gooblegorb::ReadFile(filename, buffer))
 		{
-			LOG("!! ERROR !! Could not load model %s", filename.c_str());
+			LOG("!! !! ERROR !! !! Could not load model %s", filename.c_str());
 			return false;
 		}
 

@@ -3,10 +3,9 @@
 #include "Resource/Resource.h"
 #include <string> 
 
-//#include "SDL.h"
-// !! forward declaration for SDL pointers below (SDL likes to use structs) 
 struct SDL_Texture;
-// !! add namespace 
+struct SDL_Surface;
+
 namespace gooblegorb
 {
 // !! forward declaration for Renderer below 
@@ -22,6 +21,7 @@ namespace gooblegorb
 		bool Create(Renderer& renderer, const std::string& filename);
 
 		bool Create(std::string filename, ...) override;
+		bool CreateFromSurface(SDL_Surface* surface, Renderer& renderer);
 
 		Vector2 GetSize() const;
 

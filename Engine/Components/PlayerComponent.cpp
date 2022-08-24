@@ -2,68 +2,77 @@
 #include "Engine.h"
 #include <iostream>
 
-void gooblegorb::PlayerComponent::Update()
+namespace gooblegorb
 {
-	//std::cout << "hello from the moon or sum shit" << std::endl;
-
-	Vector2 direction = Vector2::zero;
-
-	if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
+	void PlayerComponent::Initialize()
 	{
-		m_owner->m_transform.rotation -= 180 * g_time.deltaTime;
-		//direction = Vector2::left;
-	}
-
-	if (g_inputSystem.GetKeyState(key_right) == InputSystem::KeyState::Held)
-	{
-		m_owner->m_transform.rotation += 180 * g_time.deltaTime;
-		//direction = Vector2::right;
-	}
-
-	float thrust = 0;
-
-	if (g_inputSystem.GetKeyState(key_up) == InputSystem::KeyState::Held)
-	{
-		thrust = speed;
-		//direction = Vector2::up;
-	}
-
-	auto component = m_owner->GetComponent<PhysicsComponent>();
-
-	if (component)
-	{
-		//thrust
-		Vector2 force = Vector2::Rotate({ 1, 0 }, (math::DegtoRad(m_owner->m_transform.rotation))) * thrust;
-		component->ApplyForce(force);
-
-		//gravity
-		force = (Vector2{ 400,300 } - m_owner->m_transform.position).Normalized() * 100.0f;
-		component->ApplyForce(force);
-	}
-
-	m_owner->m_transform.position += direction * 300 * g_time.deltaTime;
-
-	if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
-	{
-		auto component = m_owner->GetComponent<AudioComponent>();
+		auto component = m_owner->GetComponent<CollisionComponent>();
 		if (component)
 		{
-			component->Play();
+			component->SetCollisionEnter(std::bind(&PlayerComponent::onCollisionEnter, this, std::placeholders::_1));
+			component->SetCollisionExit(std::bind(&PlayerComponent::onCollisionExit, this, std::placeholders::_1));
 		}
+	}
+
+	void PlayerComponent::Update()
+	{
+		//std::cout << "hello from the moon or sum shit" << std::endl;
+
+		//move left and right
+		Vector2 direction = Vector2::zero;
+
+		if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
+		{
+			direction = Vector2::left;
+			//direction = Vector2::left;
+		}
+
+		if (g_inputSystem.GetKeyState(key_right) == InputSystem::KeyState::Held)
+		{
+			direction = Vector2::right;
+			//direction = Vector2::right;
+		}
+
+		auto component = m_owner->GetComponent<PhysicsComponent>();
+		if (component)
+		{
+			component->ApplyForce(direction * speed);
+		}
+
+		if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
+		{
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+
+			if (component)
+			{
+				component->ApplyForce(Vector2::up * 500);
+			}
+		}
+	}
+
+	bool PlayerComponent::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+
+	bool PlayerComponent::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, speed);
+
+		return true;
+	}
+
+	void PlayerComponent::onCollisionEnter(Actor* other)
+	{
+		std::cout << "player enter\n";
+	}
+
+	void PlayerComponent::onCollisionExit(Actor* other)
+	{
+		std::cout << "player exit\n";
 	}
 }
 
-bool gooblegorb::PlayerComponent::Write(const rapidjson::Value& value) const
-{
-	return true;
-}
-
-bool gooblegorb::PlayerComponent::Read(const rapidjson::Value& value)
-{
-	READ_DATA(value, speed);
-
-	return true;
-}
 
 	//if (g_inputSystem.GetKeyState(key_down) == InputSystem::KeyState::Held)
 	//{

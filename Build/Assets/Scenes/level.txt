@@ -62,31 +62,40 @@
             }
          ]
       },
-      { 
-         "type":"Actor", 
-         "name":"Text", 
-         "transform":{ 
-            "position":[ 
-               40, 
-               30 
-            ], 
-            "scale":[ 
-               1, 
-               1 
-            ], 
-            "rotation":0 
-         }, 
-         "components":[ 
-            { 
-               "type":"TextComponent", 
-               "text":"Hello World!", 
-               "font_name":"font/dogicapixel.ttf", 
-               "font_size":16, 
-               "registration": [0.0, 0.5], 
-               "color":[0, 0, 0, 255] 
-            } 
-         ] 
-      }, 
+      {
+         "type":"Actor",
+         "name":"Text",
+         "active":false,
+         "transform":{
+            "position":[
+               40,
+               30
+            ],
+            "scale":[
+               1,
+               1
+            ],
+            "rotation":0
+         },
+         "components":[
+            {
+               "type":"TextComponent",
+               "text":"Hello World!",
+               "font_name":"font/dogicapixel.ttf",
+               "font_size":16,
+               "registration":[
+                  0.0,
+                  0.5
+               ],
+               "color":[
+                  0,
+                  0,
+                  0,
+                  255
+               ]
+            }
+         ]
+      },
       {
          "type":"Actor",
          "name":"Player",

@@ -10,6 +10,8 @@ namespace gooblegorb
 		AudioComponent() = default;
 		~AudioComponent();
 
+		CLASS_DECLARATION(AudioComponent)
+
 		void Initialize();
 		void Update();
 

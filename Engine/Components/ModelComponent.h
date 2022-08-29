@@ -8,8 +8,11 @@ namespace gooblegorb
 	class ModelComponent : public RendererComponent
 	{
 	public:
+		CLASS_DECLARATION(ModelComponent)
+
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer)override;
+
 	public:
 		std::shared_ptr<Model> m_model;
 

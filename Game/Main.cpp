@@ -1,4 +1,5 @@
 #include <iostream>
+#include "theNameOfTheGame.h"
 #include "Engine.h"
 //#include "Renderer/Texture.h"
 
@@ -22,14 +23,12 @@ int main()
 	gooblegorb::g_renderer.SetClearColor(gooblegorb::Color{ 0,0,0,255 });
 	
 	//create scene
-	gooblegorb::Scene scene;
+	//gooblegorb::Scene scene;
 
-	rapidjson::Document document;
-	bool success = gooblegorb::json::Load("level.txt", document);
-
-	scene.Read(document);
-	scene.Initialize();
-
+	//create game
+	std::unique_ptr<theNameOfTheGame> game = std::make_unique<theNameOfTheGame>();
+	game->Initialize();
+	
 	bool quit = false;
 	while (!quit)
 	{
@@ -41,7 +40,7 @@ int main()
 		if (gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_escape) == gooblegorb::InputSystem::KeyState::Pressed) quit = true;
 		
 		//update scene
-		scene.Update();
+		game->Update();
 
 		//title.Draw(gooblegorb::g_renderer, {400,300});
 
@@ -50,15 +49,18 @@ int main()
 		//render stuff
 		gooblegorb::g_renderer.BeginFrame();
 
-		scene.Draw(gooblegorb::g_renderer);
+		game->Draw(gooblegorb::g_renderer);
 
 		gooblegorb::g_renderer.EndFrame();
 	}
-	scene.RemoveAll();
+	game->Shutdown();
+	game.reset();
 
+	gooblegorb::Factory::Instance().Shutdown();
+
+	gooblegorb::g_physicsSystem.Shutdown();
 	gooblegorb::g_resources.Shutdown();
 	gooblegorb::g_audioSystem.Shutdown();
 	gooblegorb::g_inputSystem.Shutdown();
-	gooblegorb::g_physicsSystem.Shutdown();
 	gooblegorb::g_renderer.Shutdown();
 }

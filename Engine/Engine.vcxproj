@@ -167,6 +167,7 @@
     <ClCompile Include="Components\SpriteAnimComponent.cpp" />
     <ClCompile Include="Components\SpriteComponent.cpp" />
     <ClCompile Include="Components\TextComponent.cpp" />
+    <ClCompile Include="Components\TilemapComponent.cpp" />
     <ClCompile Include="Core\File.cpp" />
     <ClCompile Include="Core\Logger.cpp" />
     <ClCompile Include="Core\Memory.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Components\SpriteAnimComponent.h" />
     <ClInclude Include="Components\SpriteComponent.h" />
     <ClInclude Include="Components\TextComponent.h" />
+    <ClInclude Include="Components\TilemapComponent.h" />
     <ClInclude Include="Core\File.h" />
     <ClInclude Include="Core\Logger.h" />
     <ClInclude Include="Core\Memory.h" />
@@ -240,13 +242,9 @@
     <ClInclude Include="Serialization\Serializable.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Build\Assets\Asteroid.txt" />
-    <Text Include="..\Build\Assets\Bullet.txt" />
-    <Text Include="..\Build\Assets\Enemy.txt" />
-    <Text Include="..\Build\Assets\EnemyBullet.txt" />
-    <Text Include="..\Build\Assets\Laser.txt" />
-    <Text Include="..\Build\Assets\level.txt" />
-    <Text Include="..\Build\Assets\Model.txt" />
+    <Text Include="..\Build\Assets\Scenes\level.txt" />
+    <Text Include="..\Build\Assets\Scenes\prefabs.txt" />
+    <Text Include="..\Build\Assets\Scenes\Tilemap.txt" />
     <Text Include="..\Build\Assets\Wanderer.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -146,6 +146,9 @@
     <ClCompile Include="Physics\ContactListener.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Components\TilemapComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.h">
@@ -286,30 +289,21 @@
     <ClInclude Include="Physics\ContactListener.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Components\TilemapComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Build\Assets\Bullet.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="..\Build\Assets\Enemy.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="..\Build\Assets\Model.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="..\Build\Assets\EnemyBullet.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="..\Build\Assets\Wanderer.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="..\Build\Assets\Asteroid.txt">
+    <Text Include="..\Build\Assets\Scenes\level.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="..\Build\Assets\Laser.txt">
+    <Text Include="..\Build\Assets\Scenes\prefabs.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="..\Build\Assets\level.txt">
+    <Text Include="..\Build\Assets\Scenes\Tilemap.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

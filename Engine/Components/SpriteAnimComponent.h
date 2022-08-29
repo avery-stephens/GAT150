@@ -9,12 +9,15 @@ namespace gooblegorb
 	class SpriteAnimComponent : public RendererComponent
 	{
 	public:
+		CLASS_DECLARATION(SpriteAnimComponent)
+
 		// Inherited via RendererComponent
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
+
 	public:
 		float fps = 0;
 		int num_columns = 0;
@@ -26,7 +29,7 @@ namespace gooblegorb
 		int frame = 0;
 		float frameTimer = 0;
 
-		Rect source;
+		Rect& GetSource() override;
 		std::shared_ptr<Texture> m_texture;
 	};
 }

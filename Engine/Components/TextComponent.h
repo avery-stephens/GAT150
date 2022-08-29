@@ -12,6 +12,8 @@ namespace gooblegorb
 	class TextComponent : public RendererComponent
 	{
 	public:
+		CLASS_DECLARATION(TextComponent)
+
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 

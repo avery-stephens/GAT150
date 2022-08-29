@@ -1,14 +1,19 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Math/Rect.h"
 
 namespace gooblegorb
 {
 	class Renderer;
+
 	class RendererComponent : public Component
 	{
 	public:
 		virtual void Draw(Renderer& renderer) = 0;
 
-		virtual void Update() override;
+		virtual Rect& GetSource() { return source; }
+
+	protected:
+		Rect source;
 	};
 }

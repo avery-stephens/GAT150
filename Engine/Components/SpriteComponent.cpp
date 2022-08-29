@@ -10,9 +10,9 @@ namespace gooblegorb
 
 	}
 
-	void gooblegorb::SpriteComponent::Draw(Renderer& renderer)
+	void SpriteComponent::Draw(Renderer& renderer)
 	{
-		renderer.Draw(m_texture, source, m_owner->m_transform);
+		renderer.Draw(m_texture, GetSource(), m_owner->m_transform);
 	}
 	bool SpriteComponent::Write(const rapidjson::Value& value) const
 	{

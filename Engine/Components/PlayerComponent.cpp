@@ -33,6 +33,18 @@ namespace gooblegorb
 			//direction = Vector2::right;
 		}
 
+
+		if (g_inputSystem.GetKeyState(key_A) == InputSystem::KeyState::Held)
+		{
+			direction = Vector2::left;
+		}
+
+		if (g_inputSystem.GetKeyState(key_D) == InputSystem::KeyState::Held)
+		{
+			direction = Vector2::right;
+		}
+
+
 		auto component = m_owner->GetComponent<PhysicsComponent>();
 		if (component)
 		{
@@ -40,6 +52,16 @@ namespace gooblegorb
 		}
 
 		if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
+		{
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+
+			if (component)
+			{
+				component->ApplyForce(Vector2::up * 500);
+			}
+		}
+
+		if (g_inputSystem.GetKeyState(key_W) == InputSystem::KeyState::Pressed)
 		{
 			auto component = m_owner->GetComponent<PhysicsComponent>();
 
@@ -64,12 +86,16 @@ namespace gooblegorb
 
 	void PlayerComponent::onCollisionEnter(Actor* other)
 	{
-		std::cout << "player enter\n";
+		if (other->GetTag() == "Pickup")
+		{
+			other->SetDestroy();
+		}
+		//std::cout << "player enter\n";
 	}
 
 	void PlayerComponent::onCollisionExit(Actor* other)
 	{
-		std::cout << "player exit\n";
+		//std::cout << "player exit\n";
 	}
 }
 

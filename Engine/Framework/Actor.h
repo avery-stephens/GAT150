@@ -12,7 +12,10 @@ namespace gooblegorb
 	{
 	public:
 		Actor() = default;
+		Actor(const Actor& other);
 		Actor(const Transform& transform) : m_transform{ transform } {}
+
+		CLASS_DECLARATION(Actor)
 
 		virtual void Update() override;
 		virtual void Initialize() override;
@@ -36,6 +39,13 @@ namespace gooblegorb
 		const std::string& GetName() { return name; }
 		void SetName(const std::string& name) { this->name = name; }
 
+		void SetDestroy() { destroy = true; }
+
+		void SetActor(bool active = true) { this->active = active; }
+		bool isActive() { return active; }
+
+		Scene* GetScene() { return m_scene; }
+
 		friend class Scene;
 		friend class Component;
 		//friend class Component;
@@ -46,13 +56,12 @@ namespace gooblegorb
 		std::string name;
 		std::string tag;
 
+		bool active = true;
 		bool destroy = false;
-		//physics
-		float damping = 1;
-		Vector2 velocity;
 
 		Scene* m_scene = nullptr;
 		Actor* m_parent = nullptr;
+
 		std::vector<std::unique_ptr<Component>> m_components;
 		std::vector<std::unique_ptr<Actor>> m_children;
 	};

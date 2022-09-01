@@ -51,7 +51,7 @@ namespace gooblegorb
 	{
 		for(auto& actor : m_actors) // !! for loop (range based) through m_actors 
 		{
-			if (actor.get()->GetName())// !! compare name to actor GetName()
+			if (actor.get()->GetName() == name)// !! compare name to actor GetName()
 			{
 				return dynamic_cast<T*>(actor.get()); // !! get() actor pointer); 
 			}
@@ -67,7 +67,7 @@ namespace gooblegorb
 
 		for (auto& actor : m_actors)//  !! for loop (range based) through m_actors 
 		{
-			if (actor.get()->GetName())//  !! compare name to actor GetName()) 
+			if (actor.get()->GetTag() == tag)//  !! compare name to actor GetName()) 
 			{
 				T* tagActor = dynamic_cast<T*>(actor.get());//  !! get() actor pointer); 
 

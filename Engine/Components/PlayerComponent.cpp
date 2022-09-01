@@ -6,12 +6,7 @@ namespace gooblegorb
 {
 	void PlayerComponent::Initialize()
 	{
-		auto component = m_owner->GetComponent<CollisionComponent>();
-		if (component)
-		{
-			component->SetCollisionEnter(std::bind(&PlayerComponent::onCollisionEnter, this, std::placeholders::_1));
-			component->SetCollisionExit(std::bind(&PlayerComponent::onCollisionExit, this, std::placeholders::_1));
-		}
+		CharacterComponent::Initialize();
 	}
 
 	void PlayerComponent::Update()
@@ -24,13 +19,11 @@ namespace gooblegorb
 		if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
 		{
 			direction = Vector2::left;
-			//direction = Vector2::left;
 		}
 
 		if (g_inputSystem.GetKeyState(key_right) == InputSystem::KeyState::Held)
 		{
 			direction = Vector2::right;
-			//direction = Vector2::right;
 		}
 
 
@@ -44,31 +37,73 @@ namespace gooblegorb
 			direction = Vector2::right;
 		}
 
-
+		Vector2 velocity;
 		auto component = m_owner->GetComponent<PhysicsComponent>();
 		if (component)
 		{
-			component->ApplyForce(direction * speed);
+			// if in the air (m_groundCount == 0) then reduce force 
+			float multiplier = (m_groundCount > 0) ? 1 : 0.2f;
+
+			component->ApplyForce(direction * speed * multiplier);
+			velocity = component->velocity;
 		}
 
-		if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
+		if (m_groundCount > 0 && g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
 		{
+			Vector2 velocity;
 			auto component = m_owner->GetComponent<PhysicsComponent>();
+
+			gooblegorb::g_audioSystem.PlayAudio("jump");
 
 			if (component)
 			{
-				component->ApplyForce(Vector2::up * 500);
+				component->ApplyForce(Vector2::up * jump);
+			}
+
+			auto renderComponent = m_owner->GetComponent <RendererComponent>();
+			if (renderComponent)
+			{
+				if (velocity.x != 0) renderComponent->SetFlipHorizontal(velocity.x < 0);
 			}
 		}
 
-		if (g_inputSystem.GetKeyState(key_W) == InputSystem::KeyState::Pressed)
+		if (m_groundCount > 0 && g_inputSystem.GetKeyState(key_W) == InputSystem::KeyState::Pressed)
 		{
+			Vector2 velocity;
 			auto component = m_owner->GetComponent<PhysicsComponent>();
+
+			gooblegorb::g_audioSystem.PlayAudio("jump");
 
 			if (component)
 			{
-				component->ApplyForce(Vector2::up * 500);
+				component->ApplyForce(Vector2::up * jump);
 			}
+
+			auto renderComponent = m_owner->GetComponent <RendererComponent>();
+			if (renderComponent)
+			{
+				if (velocity.x != 0) renderComponent->SetFlipHorizontal(velocity.x < 0);
+			}
+		}
+
+		auto animComponent = m_owner->GetComponent<SpriteAnimComponent>();
+		if (animComponent)
+		{
+			if (velocity.x != 0) animComponent->SetFlipHorizontal(velocity.x < 0);
+			if (std::fabs(velocity.x) > 0)
+			{
+				animComponent->SetSequence("run");
+			}
+			else
+			{
+				animComponent->SetSequence("idle");
+			}
+		}
+
+		auto camera = m_owner->GetScene()->GetActorFromName("Camera");
+		if (camera)
+		{
+			camera->m_transform.position = m_owner->m_transform.position;
 		}
 	}
 
@@ -79,63 +114,82 @@ namespace gooblegorb
 
 	bool PlayerComponent::Read(const rapidjson::Value& value)
 	{
-		READ_DATA(value, speed);
+		CharacterComponent::Read(value);
+		READ_DATA(value, jump);
 
 		return true;
 	}
 
+	void PlayerComponent::OnNotify(const Event& event)
+	{
+		if (event.name == "EVENT_DAMAGE")
+		{
+			health -= std::get<float>(event.data);
+			std::cout << health << std::endl;
+			if (health <= 0)
+			{
+				m_owner->SetDestroy();
+
+				Event event;
+				event.name = "EVENT_PLAYER_DEAD";
+
+				g_eventManager.Notify(event);
+			}
+		}
+	}
+
 	void PlayerComponent::onCollisionEnter(Actor* other)
 	{
-		if (other->GetTag() == "Pickup")
+		if (other->GetName() == "Coin")
 		{
+			Event event;
+			event.name = "EVENT ADD_POINTS";
+			event.data = 100;
+
+			g_eventManager.Notify(event);
+
+			gooblegorb::g_audioSystem.PlayAudio("coin");
+
 			other->SetDestroy();
+		}
+
+		if (other->GetTag() == "Enemy")
+		{
+			Event event;
+			event.name = "EVENT_DAMAGE";
+			event.data = damage;
+			event.reciever = other;
+
+			g_eventManager.Notify(event);
+		}
+
+		//if (other->GetName() == "HealthFood")
+		//{
+		//	Event event;
+		//	event.name = "EVENT ADD_POINTS";
+		//	event.name = "EVENT_ADD_HEALTH";
+		//	event.data = 50;
+		//	event.reciever = other;
+
+		//	g_eventManager.Notify(event);
+
+		//	other->SetDestroy();
+		//}
+
+		if (other->GetTag() == "Ground")
+		{
+			m_groundCount++;
 		}
 		//std::cout << "player enter\n";
 	}
 
 	void PlayerComponent::onCollisionExit(Actor* other)
 	{
+		if (other->GetTag() == "Ground")
+		{
+			m_groundCount--;
+		}
+
 		//std::cout << "player exit\n";
 	}
 }
-
-
-	//if (g_inputSystem.GetKeyState(key_down) == InputSystem::KeyState::Held)
-	//{
-	//	direction = Vector2::down;
-	//}
-
-	/*
-	auto leftArrow = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_left) == gooblegorb::InputSystem::KeyState::Held;
-	auto leftA = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_A) == gooblegorb::InputSystem::KeyState::Held;
-	if (leftArrow || leftA)
-	{
-		m_owner->m_transform.position.x -= m_speed * gooblegorb::g_time.deltaTime;
-	}
-
-	auto rightArrow = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_right) == gooblegorb::InputSystem::KeyState::Held;
-	auto rightD = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_D) == gooblegorb::InputSystem::KeyState::Held;
-	if (rightArrow || rightD)
-	{
-		m_owner->m_transform.position.x += m_speed * gooblegorb::g_time.deltaTime;
-	}
-
-	auto upArrow = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_up) == gooblegorb::InputSystem::KeyState::Held;
-	auto upW = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_W) == gooblegorb::InputSystem::KeyState::Held;
-
-	if(upArrow || upW)
-	{
-		m_owner->m_transform.position.y -= m_speed * gooblegorb::g_time.deltaTime;
-	}
-
-	auto downArrow = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_right) == gooblegorb::InputSystem::KeyState::Held;
-	auto downS = gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_S) == gooblegorb::InputSystem::KeyState::Held;
-
-	if (downArrow || downS)
-	{
-		m_owner->m_transform.position.y += m_speed * gooblegorb::g_time.deltaTime;
-	}
-	*/
-
-	
-

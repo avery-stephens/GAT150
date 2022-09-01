@@ -20,9 +20,11 @@ namespace gooblegorb
 
 		int GetScore() { return m_score; }
 		void AddPoints(int points) { m_score += points; }
-
+		//void AddHealth(int m_health) {  += m_health; }
+		
 	protected:
 		std::unique_ptr<Scene> m_scene;
 		int m_score = 0;
+
 	};
 }

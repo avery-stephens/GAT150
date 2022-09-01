@@ -15,12 +15,14 @@ namespace gooblegorb
 			Actor* actorA = (Actor*)(fixtureA->GetUserData().pointer);
 			Actor* actorB = (Actor*)(fixtureB->GetUserData().pointer);
 
-			if(actorA->GetComponent<CollisionComponent>())
+			if (actorA->isDestroyed() || actorB->isDestroyed()) return;
+
+			if (actorA->GetComponent<CollisionComponent>())
 			{
 				actorA->GetComponent<CollisionComponent>()->onCollisionEnter(actorB);
 			}
 			
-			if(actorB->GetComponent<CollisionComponent>())
+			if (actorB->GetComponent<CollisionComponent>())
 			{
 				actorB->GetComponent<CollisionComponent>()->onCollisionEnter(actorA);
 			}
@@ -37,6 +39,8 @@ namespace gooblegorb
 		{
 			Actor* actorA = (Actor*)(fixtureA->GetUserData().pointer);
 			Actor* actorB = (Actor*)(fixtureB->GetUserData().pointer);
+
+			if (actorA->isDestroyed() || actorB->isDestroyed()) return;
 
 			if (actorA->GetComponent<CollisionComponent>())
 			{

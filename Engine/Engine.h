@@ -16,6 +16,7 @@
 #include "Framework/Game.h"
 #include "Framework/Factory.h"
 #include "Framework/Singleton.h"
+#include "Framework/EventManager.h"
 
 #include "Components/PlayerComponent.h"
 #include "Components/SpriteComponent.h"
@@ -27,6 +28,8 @@
 #include "Components/RBPhysicsComponent.h"
 #include "Components/TextComponent.h"
 #include "Components/TilemapComponent.h"
+#include "Components/CharacterComponent.h"
+#include "Components/CameraComponent.h"
 
 #include "Renderer/Text.h"
 #include "Renderer/Font.h"
@@ -43,6 +46,7 @@
 #include <memory>
 #include <vector>
 #include <list>
+#include <variant>
 
 namespace gooblegorb
 {
@@ -57,6 +61,8 @@ namespace gooblegorb
 	extern ResourceManager g_resources;
 
 	extern PhysicsSystem g_physicsSystem;
+
+	extern EventManager g_eventManager;
 
 	class Engine : public Singleton<Engine>
 	{

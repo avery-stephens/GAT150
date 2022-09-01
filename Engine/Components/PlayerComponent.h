@@ -1,10 +1,11 @@
 #pragma once
 #include "Framework/Component.h"
 #include "Physics/Collision.h"
+#include "CharacterComponent.h"
 
 namespace gooblegorb
 {
-	class PlayerComponent : public Component, public ICollision
+	class PlayerComponent : public CharacterComponent
 	{
 	public:
 		PlayerComponent() = default;
@@ -13,6 +14,7 @@ namespace gooblegorb
 		void Initialize() override;
 		void Update() override;
 
+		virtual void OnNotify(const Event& event) override;
 		virtual void onCollisionEnter(Actor* other) override;
 		virtual void onCollisionExit(Actor* other) override;
 
@@ -20,7 +22,7 @@ namespace gooblegorb
 		virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
-		float speed = 0;
-
+		float jump = 2000;
+		int m_groundCount = 0;
 	};
 }

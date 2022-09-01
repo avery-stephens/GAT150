@@ -30,6 +30,7 @@ namespace gooblegorb
 
 	private:
 		PhysicsSystem::CollisionData data;
+		Vector2 scaleOffset = Vector2{ 1,1 };
 
 		functionPtr m_enterFunction;
 		functionPtr m_exitFunction;

@@ -40,8 +40,9 @@ namespace gooblegorb
 		void SetName(const std::string& name) { this->name = name; }
 
 		void SetDestroy() { destroy = true; }
+		bool isDestroyed() { return destroy; }
 
-		void SetActor(bool active = true) { this->active = active; }
+		void SetActive(bool active = true) { this->active = active; }
 		bool isActive() { return active; }
 
 		Scene* GetScene() { return m_scene; }
@@ -58,6 +59,8 @@ namespace gooblegorb
 
 		bool active = true;
 		bool destroy = false;
+
+		float lifespan = 0;
 
 		Scene* m_scene = nullptr;
 		Actor* m_parent = nullptr;

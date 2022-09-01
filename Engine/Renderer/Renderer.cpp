@@ -18,6 +18,9 @@ namespace gooblegorb
 		SDL_Init(SDL_INIT_VIDEO);
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		TTF_Init();
+
+		m_view = Matrix3x3::identity;
+		m_viewport = Matrix3x3::identity;
 	}
 
 	void Renderer::Shutdown()
@@ -78,13 +81,15 @@ namespace gooblegorb
 		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
 	}
 
-	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration)
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration, bool flipH)
 	{
+		Matrix3x3 mx = m_viewport * m_view * transform.matrix;
+
 		Vector2 size = Vector2{source.w, source.h};
-		size = size * transform.scale;
+		size = size * mx.GetScale();
 
 		Vector2 origin = size * registration;
-		Vector2 Tposition = transform.position - origin;
+		Vector2 Tposition = mx.GetTranslation() - origin;
 
 		SDL_Rect dest;
 		// !! make sure to cast to int to prevent compiler warnings 
@@ -101,7 +106,8 @@ namespace gooblegorb
 
 		SDL_Point center{ (int)origin.x,(int)origin.y };
 
-		SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, transform.rotation, &center, SDL_FLIP_NONE);
+		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, math::RadtoDeg(mx.GetRotation()), &center, flip);
 	}
 
 	void Renderer::BeginFrame()

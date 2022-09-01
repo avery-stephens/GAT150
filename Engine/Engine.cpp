@@ -14,6 +14,8 @@ namespace gooblegorb
 
 	PhysicsSystem g_physicsSystem;
 
+	EventManager g_eventManager;
+
 	void Engine::Register()
 	{
 		REGISTER_CLASS(Actor);
@@ -27,5 +29,6 @@ namespace gooblegorb
 		REGISTER_CLASS(SpriteAnimComponent);
 		REGISTER_CLASS(TextComponent);
 		REGISTER_CLASS(TilemapComponent);
+		REGISTER_CLASS(CameraComponent);
 	}
 }

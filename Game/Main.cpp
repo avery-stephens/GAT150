@@ -15,6 +15,7 @@ int main()
 	gooblegorb::g_audioSystem.Initialize();
 	gooblegorb::g_resources.Initialize();
 	gooblegorb::g_physicsSystem.Initialize();
+	gooblegorb::g_eventManager.Initialize();
 
 	gooblegorb::Engine::Instance().Register();
 
@@ -36,6 +37,7 @@ int main()
 		gooblegorb::g_inputSystem.Update();
 		gooblegorb::g_audioSystem.Update();
 		gooblegorb::g_physicsSystem.Update();
+		gooblegorb::g_eventManager.Update();
 
 		if (gooblegorb::g_inputSystem.GetKeyState(gooblegorb::key_escape) == gooblegorb::InputSystem::KeyState::Pressed) quit = true;
 		
@@ -58,6 +60,7 @@ int main()
 
 	gooblegorb::Factory::Instance().Shutdown();
 
+	gooblegorb::g_eventManager.Shutdown();
 	gooblegorb::g_physicsSystem.Shutdown();
 	gooblegorb::g_resources.Shutdown();
 	gooblegorb::g_audioSystem.Shutdown();

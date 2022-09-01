@@ -149,6 +149,15 @@
     <ClCompile Include="Components\TilemapComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\EventManager.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CharacterComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CameraComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.h">
@@ -292,6 +301,18 @@
     <ClInclude Include="Components\TilemapComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Event.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\EventManager.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CharacterComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CameraComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Assets\Wanderer.txt">
@@ -315,6 +336,24 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="..\Build\Assets\Textures\background.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Textures\background2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Textures\coin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Textures\enemy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Textures\player_idle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Textures\player_walk.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Textures\tileset.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
